@@ -45,7 +45,8 @@ def return_false_on_exception(func):
     """
     @wraps(func)
     def exceptfalse(*args, **kwargs):
-        if not kwargs.pop('raise_exceptions', False):
+        kwargs.pop('raise_exceptions', False)
+        if False:#not kwargs.pop('raise_exceptions', False):
             try:
                 return func(*args, **kwargs)
             except Exception:

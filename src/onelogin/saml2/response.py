@@ -617,12 +617,12 @@ class OneLogin_Saml2_Response(object):
             if not self.validate_signed_elements(signed_elements, raise_exceptions=True):
                 raise OneLogin_Saml2_ValidationError(
                     'Found an unexpected Signature Element. SAML Response rejected',
-                    OneLogin_Saml2_ValidationError.UNEXPECTED_SIGNED_ELEMENT
+                    OneLogin_Saml2_ValidationError.UNEXPECTED_SIGNED_ELEMENTS
                 )
         return signed_elements
 
     @return_false_on_exception
-    def validate_signed_elements(self, signed_elements):
+    def validate_signed_elements(self, signed_elements, **kwargs):
         """
         Verifies that the document has the expected signed nodes.
 
@@ -636,7 +636,9 @@ class OneLogin_Saml2_Response(object):
 
         response_tag = '{%s}Response' % OneLogin_Saml2_Constants.NS_SAMLP
         assertion_tag = '{%s}Assertion' % OneLogin_Saml2_Constants.NS_SAML
-
+        print(response_tag)
+        print(assertion_tag)
+        print(signed_elements)
         if (response_tag in signed_elements and signed_elements.count(response_tag) > 1) or \
            (assertion_tag in signed_elements and signed_elements.count(assertion_tag) > 1) or \
            (response_tag not in signed_elements and assertion_tag not in signed_elements):

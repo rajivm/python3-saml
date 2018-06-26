@@ -114,6 +114,7 @@ class OneLogin_Saml2_Auth(object):
                 self.__last_assertion_not_on_or_after = response.get_assertion_not_on_or_after()
 
             else:
+                print(response.get_error())
                 self.__errors.append('invalid_response')
                 self.__error_reason = response.get_error()
 
